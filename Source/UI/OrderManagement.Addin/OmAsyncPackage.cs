@@ -1,4 +1,8 @@
-﻿namespace OrderManagement.Addin
+﻿using System.ComponentModel.Design;
+using Microsoft.VisualStudio.ComponentModelHost;
+using OrderManagement.Addin.Commands;
+
+namespace OrderManagement.Addin
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -60,6 +64,17 @@
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            var componentModel = await GetServiceAsync(typeof(SComponentModel)) as IComponentModel;
+            if (componentModel == null) throw new ArgumentNullException(nameof(componentModel));
+            if (await GetServiceAsync(typeof(IMenuCommandService)) is OleMenuCommandService commandService)
+            {
+                var commands = componentModel.GetExtensions<CommandBase>();
+                foreach (var command in commands)
+                {
+                    commandService.AddCommand(command.Command);
+                }
+            }
+
         }
 
         #endregion
