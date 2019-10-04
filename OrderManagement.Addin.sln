@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.779
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{38AE6801-61D7-4080-9072-6019DCC8AB37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManagement.Addin", "Source\UI\OrderManagement.Addin\OrderManagement.Addin.csproj", "{2AB26B9A-F67A-4C5A-91E0-BDD017F3EF69}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2AB26B9A-F67A-4C5A-91E0-BDD017F3EF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AB26B9A-F67A-4C5A-91E0-BDD017F3EF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AB26B9A-F67A-4C5A-91E0-BDD017F3EF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AB26B9A-F67A-4C5A-91E0-BDD017F3EF69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2AB26B9A-F67A-4C5A-91E0-BDD017F3EF69} = {38AE6801-61D7-4080-9072-6019DCC8AB37}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56048F5A-1C9E-4891-9805-9E99596CC4F1}
+	EndGlobalSection
+EndGlobal
