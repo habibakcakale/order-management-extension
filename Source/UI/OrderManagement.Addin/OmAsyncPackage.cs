@@ -1,15 +1,16 @@
-﻿using System.ComponentModel.Design;
-using Microsoft.VisualStudio.ComponentModelHost;
-using OrderManagement.Addin.Commands;
-
-namespace OrderManagement.Addin
+﻿namespace OrderManagement.Addin
 {
     using System;
+    using System.ComponentModel.Design;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
     using System.Threading;
-    using Microsoft.VisualStudio.Shell;
 
+    using Microsoft.VisualStudio.Shell;
+    using Microsoft.VisualStudio.ComponentModelHost;
+    using Microsoft.VisualStudio.Shell.Interop;
+
+    using OrderManagement.Addin.Commands;
 
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -32,6 +33,9 @@ namespace OrderManagement.Addin
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)] // Info on this package for Help/About
     [Guid(PackageGuidString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
+    [ProvideMenuResource("Menus.ctmenu", 1)]
+    [ProvideAutoLoad(UIContextGuids80.NoSolution, PackageAutoLoadFlags.BackgroundLoad)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionExists, PackageAutoLoadFlags.BackgroundLoad)]
     public sealed class OmAsyncPackage : AsyncPackage
     {
         /// <summary>
@@ -61,8 +65,6 @@ namespace OrderManagement.Addin
         /// <returns>A task representing the async work of package initialization, or an already completed task if there is none. Do not return null from this method.</returns>
         protected override async System.Threading.Tasks.Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            // When initialized asynchronously, the current thread may be a background thread at this point.
-            // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             var componentModel = await GetServiceAsync(typeof(SComponentModel)) as IComponentModel;
             if (componentModel == null) throw new ArgumentNullException(nameof(componentModel));
@@ -74,7 +76,6 @@ namespace OrderManagement.Addin
                     commandService.AddCommand(command.Command);
                 }
             }
-
         }
 
         #endregion

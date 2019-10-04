@@ -12,7 +12,7 @@ namespace OrderManagement.Addin.Commands
         /// <summary>
         /// Command set of Menu
         /// </summary>
-        public static readonly Guid CommandSet = new Guid("b533aa3e-13ff-44f0-b55d-a2a2394c2035");
+        public static readonly Guid CommandSet = new Guid("55a0754a-c67f-46e4-8cff-ab81f9dc0971");
 
         public MenuCommand Command { get; private set; }
 

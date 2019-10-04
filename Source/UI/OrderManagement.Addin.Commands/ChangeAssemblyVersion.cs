@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 namespace OrderManagement.Addin.Commands
 {
     [Export(typeof(CommandBase))]
-    internal sealed class ChangeAssemblyVersion : CommandBase
+    public sealed class ChangeAssemblyVersion : CommandBase
     {
         private readonly IServiceProvider provider;
 
@@ -23,7 +23,9 @@ namespace OrderManagement.Addin.Commands
         /// </summary>
         /// <param name="provider">Owner package, not null.</param>
         [ImportingConstructor]
-        public ChangeAssemblyVersion(IServiceProvider provider) : base(CommandId)
+        public ChangeAssemblyVersion(
+            [Import(typeof(SVsServiceProvider))] IServiceProvider provider
+            ) : base(CommandId)
         {
             this.provider = provider ?? throw new ArgumentNullException(nameof(provider));
         }
@@ -37,8 +39,8 @@ namespace OrderManagement.Addin.Commands
         /// <param name="e">Event args.</param>
         protected override void Execute(object sender, EventArgs e)
         {
-            //var selector = provider.GetService(typeof(ProjectSelector)) as ProjectSelector;
-            //selector?.ShowModal();
+            ////var selector = provider.GetService(typeof(ProjectSelector)) as ProjectSelector;
+            ////selector?.ShowModal();
             ThreadHelper.ThrowIfNotOnUIThread();
             string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()",
                 this.GetType().FullName);
