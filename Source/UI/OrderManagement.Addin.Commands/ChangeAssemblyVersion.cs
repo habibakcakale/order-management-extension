@@ -14,7 +14,7 @@ namespace OrderManagement.Addin.Commands
         /// <summary>
         /// Command ID.
         /// </summary>
-        public const int CommandId = 0x0100;
+        public const int CommandId = 0x202;
 
 
         /// <summary>
@@ -23,9 +23,7 @@ namespace OrderManagement.Addin.Commands
         /// </summary>
         /// <param name="provider">Owner package, not null.</param>
         [ImportingConstructor]
-        public ChangeAssemblyVersion(
-            [Import(typeof(SVsServiceProvider))] IServiceProvider provider
-            ) : base(CommandId)
+        public ChangeAssemblyVersion([Import(typeof(SVsServiceProvider))] IServiceProvider provider) : base(CommandId)
         {
             this.provider = provider ?? throw new ArgumentNullException(nameof(provider));
         }

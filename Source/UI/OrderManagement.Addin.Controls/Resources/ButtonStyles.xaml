@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vs="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.15.0">
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Padding" Value="10,2"/> 
+        <Setter Property="MinWidth" Value="75"></Setter>
+        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+        <Setter Property="Background" Value="{DynamicResource {x:Static vs:EnvironmentColors.SystemButtonFaceBrushKey}}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static vs:EnvironmentColors.SystemButtonTextBrushKey}}"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            TextBlock.Foreground="{TemplateBinding Foreground}" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource {x:Static vs:EnvironmentColors.MainWindowButtonHoverActiveBrushKey}}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource {x:Static vs:EnvironmentColors.MainWindowButtonDownBrushKey}}"></Setter>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static vs:EnvironmentColors.MainWindowButtonDownGlyphBrushKey}}"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
