@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddinConfigurationException.cs" />
+    <Compile Include="Analyzers\Project.cs" />
     <Compile Include="BaseException.cs" />
     <Compile Include="Configuration\AddinConfiguration.cs" />
     <Compile Include="Configuration\SolutionConfiguration.cs" />
@@ -83,6 +84,7 @@
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -2,7 +2,9 @@
 {
     using System.ComponentModel;
     using System.Data.SqlClient;
+    using PropertyChanged;
 
+    [AddINotifyPropertyChangedInterface]
     public class SolutionConfiguration
     {
         private const string Database = "Database";
@@ -13,14 +15,17 @@
         [Browsable(false)]
         public string MasterConnectionString
         {
-            get
-            {
-                var builder = new SqlConnectionStringBuilder() {
-                    {nameof(DataSource), DataSource},
-                    {nameof(InitialCatalog), InitialCatalog},
-                    {nameof(UserId), UserId},
-                    {nameof(Password), Password},
+            get {
+                var builder = new SqlConnectionStringBuilder {
+                    DataSource = this.DataSource,
+                    InitialCatalog = this.InitialCatalog,
+                    UserID = this.UserId,
+                    Password = this.Password,
+                    MultipleActiveResultSets = true
                 };
+                //try integrated security.
+                if (string.IsNullOrEmpty(this.UserId))
+                    builder.IntegratedSecurity = true;
                 return builder.ToString();
             }
         }

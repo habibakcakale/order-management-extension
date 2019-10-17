@@ -181,6 +181,12 @@
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\OrderManagement.Addin.Analyzers\OrderManagement.Addin.Analyzers.csproj">
+      <Project>{F94DB751-AD0D-4607-B98E-72AEACAFCDF1}</Project>
+      <Name>OrderManagement.Addin.Analyzers</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
     <ProjectReference Include="..\..\Utilities\OrderManagement.Addin.Utilities\OrderManagement.Addin.Utilities.csproj">
       <Project>{015F21ED-0DB0-4955-ADD4-E6C896E6E50D}</Project>
       <Name>OrderManagement.Addin.Utilities</Name>

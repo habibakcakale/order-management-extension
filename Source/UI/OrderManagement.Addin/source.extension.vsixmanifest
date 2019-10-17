@@ -22,5 +22,6 @@
         <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%.Controls" Path="|OrderManagement.Addin.Controls|" />
         <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%.Utilities" Path="|OrderManagement.Addin.Utilities|" />
         <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%.Data" Path="|OrderManagement.Addin.Data|" />
+        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%.Analyzers" Path="|OrderManagement.Addin.Analyzers|" />
     </Assets>
 </PackageManifest>

@@ -18,8 +18,7 @@
 
         public async Task<IEnumerable<Store>> GetStores() {
             var connection = new SqlConnection(configuration.MasterConnectionString);
-            var stores =
-                await connection.QueryAsync<Store>("SELECT ID, CompanyName, ConnectionString, Guid FROM Stores");
+            var stores = await connection.QueryAsync<Store>("SELECT ID, CompanyName, ConnectionString, Guid FROM Stores");
             return stores;
         }
     }

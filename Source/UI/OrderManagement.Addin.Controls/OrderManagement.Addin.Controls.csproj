@@ -139,6 +139,7 @@
     <None Include="..\..\..\SolutionItems\Key.snk">
       <Link>Key.snk</Link>
     </None>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -157,6 +158,10 @@
     <ProjectReference Include="..\..\Data\OrderManagement.Addin.Data\OrderManagement.Addin.Data.csproj">
       <Project>{8E1EDF73-6B62-4543-B6E1-3A7F4005898B}</Project>
       <Name>OrderManagement.Addin.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\OrderManagement.Addin.Analyzers\OrderManagement.Addin.Analyzers.csproj">
+      <Project>{f94db751-ad0d-4607-b98e-72aeacafcdf1}</Project>
+      <Name>OrderManagement.Addin.Analyzers</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Utilities\OrderManagement.Addin.Utilities\OrderManagement.Addin.Utilities.csproj">
       <Project>{015F21ED-0DB0-4955-ADD4-E6C896E6E50D}</Project>

@@ -15,9 +15,29 @@
             <i:InvokeCommandAction Command="{Binding ViewLoadedCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid>
-        <Grid
-        <DataGrid  Margin="10" ItemsSource="{Binding Stores}" SelectionMode="Extended" SelectionUnit="FullRow"/>
-
+    <Grid Margin="0 0 0 10">
+        <Grid.RowDefinitions>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Row="0" Grid.Column="0" 
+                  Margin="10" ItemsSource="{Binding Stores}" 
+                  CanUserAddRows="False"
+                  SelectionMode="Extended" SelectionUnit="FullRow" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding CompanyName}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Projects}"></DataGrid>
+        <StackPanel Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Margin="0 0 10 0">Increment Selected</Button>
+            <Button Margin="0 0 10 0">Increment All</Button>
+            <Button Margin="0 0 10 0">Update Selected Environment</Button>
+        </StackPanel>
     </Grid>
 </platformUi:DialogWindow>

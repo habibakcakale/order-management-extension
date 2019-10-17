@@ -1,8 +1,10 @@
 ﻿namespace OrderManagement.Addin.Controls.ViewModels {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Data.SqlClient;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
     using System.Xml.Linq;
@@ -22,6 +24,7 @@
         public SolutionConfiguration SolutionConfiguration { get; set; }
 
         public ICommand SaveCommand { get; set; }
+        public ICommand GetConnectionStringCommand { get; set; }
         private static readonly string[] ConfigFiles = { "app.config", "web.config" };
 
         [ImportingConstructor]
@@ -34,6 +37,7 @@
 
             this.SolutionConfiguration = solutionConfiguration;
             this.SaveCommand = new DelegateCommand<SolutionConfiguration>(Save);
+            this.GetConnectionStringCommand = new DelegateCommand<object>(GetConnectionString);
         }
 
         //TODO: Make it async Task
@@ -65,9 +69,17 @@
         private void ReadConfigurationFile(string configFile)
         {
             var document = XDocument.Load(configFile);
+            var element = document.Descendants().FirstOrDefault(item => {
+                var keyAttr = item.Attribute("key");
+
+                return string.Equals(item.Name.LocalName, "add", StringComparison.InvariantCultureIgnoreCase)
+                       && keyAttr != null
+                       && keyAttr.Value.EndsWith("MasterConnectionString", StringComparison.InvariantCultureIgnoreCase);
+            });
+
             //TODO: Should get connection string from Window
-            var element = document.XPathSelectElement("//connectionStrings/add[@name='VeriBranchDataEntitiesBase']");
-            var connectionStringAttribute = element?.Attribute("connectionString");
+            //var element = document.XPathSelectElement("//connectionStrings/add[@name='VeriBranchDataEntitiesBase']");
+            var connectionStringAttribute = element?.Attribute("value");
             if (connectionStringAttribute != null && !string.IsNullOrWhiteSpace(connectionStringAttribute.Value))
             {
                 var builder = new SqlConnectionStringBuilder(connectionStringAttribute.Value);
