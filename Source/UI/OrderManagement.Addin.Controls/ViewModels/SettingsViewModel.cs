@@ -1,6 +1,7 @@
 ﻿namespace OrderManagement.Addin.Controls.ViewModels {
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
+    using System.Data.SqlClient;
     using System.IO;
     using System.Threading.Tasks;
     using System.Windows.Input;
@@ -9,12 +10,14 @@
     using Models.Configuration;
     using PropertyChanged;
     using Utilities;
+    using Views.Pickers;
 
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     [AddINotifyPropertyChangedInterface]
     public class SettingsViewModel {
         private readonly SettingsPersister settingPersister;
+        private readonly ProjectSelectorView projectSelector;
 
         public SolutionConfiguration SolutionConfiguration { get; set; }
 
@@ -22,8 +25,12 @@
         private static readonly string[] ConfigFiles = { "app.config", "web.config" };
 
         [ImportingConstructor]
-        public SettingsViewModel(SettingsPersister settingPersister, SolutionConfiguration solutionConfiguration) {
+        public SettingsViewModel(SettingsPersister settingPersister,
+            SolutionConfiguration solutionConfiguration,
+            ProjectSelectorView projectSelector
+            ) {
             this.settingPersister = settingPersister;
+            this.projectSelector = projectSelector;
 
             this.SolutionConfiguration = solutionConfiguration;
             this.SaveCommand = new DelegateCommand<SolutionConfiguration>(Save);
@@ -38,7 +45,6 @@
 
         private void GetConnectionString(object obj)
         {
-            var projectSelector = this.componentModel.GetService<ProjectSelector>();
             var result = projectSelector.ShowDialog();
             if (result != null && result.Value)
             {
@@ -64,20 +70,11 @@
             var connectionStringAttribute = element?.Attribute("connectionString");
             if (connectionStringAttribute != null && !string.IsNullOrWhiteSpace(connectionStringAttribute.Value))
             {
-                var builder = new EntityConnectionStringBuilder(connectionStringAttribute.Value);
-                var pairs = builder.ProviderConnectionString.Split(';').Select(item => {
-                    var pair = item.Split('=');
-                    return new KeyValuePair<string, string>(pair.First(), pair.Last());
-                }).ToList();
-
-                var db = pairs.FirstOrDefault(item => string.Equals(item.Key, "initial catalog"));
-                var userId = pairs.FirstOrDefault(item => string.Equals(item.Key, "user id"));
-                var password = pairs.FirstOrDefault(item => string.Equals(item.Key, "password"));
-                var dataSource = pairs.FirstOrDefault(item => string.Equals(item.Key, "data source"));
-                AddInProject.DatabaseName = db.Value;
-                AddInProject.Password = password.Value;
-                AddInProject.UserName = userId.Value;
-                AddInProject.ServerName = dataSource.Value;
+                var builder = new SqlConnectionStringBuilder(connectionStringAttribute.Value);
+                SolutionConfiguration.InitialCatalog = builder.InitialCatalog;
+                SolutionConfiguration.Password = builder.Password;
+                SolutionConfiguration.UserId = builder.UserID;
+                SolutionConfiguration.DataSource = builder.DataSource;
             }
         }
     }

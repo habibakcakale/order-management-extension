@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace OrderManagement.Addin.Controls.Views.Pickers
+﻿namespace OrderManagement.Addin.Controls.Views.Pickers
 {
-    /// <summary>
+    using System.Collections.Generic;
+    using System.Windows.Input;
+    using ViewModels.Pickers;
+
+/// <summary>
     /// Interaction logic for ProjectSelectorView.xaml
     /// </summary>
     public partial class ProjectSelectorView
@@ -28,13 +17,13 @@ namespace OrderManagement.Addin.Controls.Views.Pickers
         }
 
 
-        public Project SelectedProject
+        public object SelectedProject
         {
-            get { return ((ProjectSelectorViewModel)this.DataContext).SelectedProject; }
-            set { ((ProjectSelectorViewModel)this.DataContext).SelectedProject = value; }
+            get => ((ProjectSelectorViewModel)this.DataContext).SelectedProject;
+            set => ((ProjectSelectorViewModel)this.DataContext).SelectedProject = value;
         }
 
-        public IList<Project> SelectedProjects => ((ProjectSelectorViewModel)this.DataContext).SelectedProjects;
+        public IList<object> SelectedProjects => ((ProjectSelectorViewModel)this.DataContext).SelectedProjects;
 
         private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e) {
             this.DialogResult = true;
