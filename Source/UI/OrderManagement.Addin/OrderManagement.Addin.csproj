@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Key.snk" />
     <None Include="packages.config" />
     <None Include="source.extension.vsixmanifest">
@@ -173,6 +174,12 @@
     <ProjectReference Include="..\..\Common\OrderManagement.Addin.Models\OrderManagement.Addin.Models.csproj">
       <Project>{66AE3751-D942-46A8-AEA0-9391F403F24A}</Project>
       <Name>OrderManagement.Addin.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\OrderManagement.Addin.Data\OrderManagement.Addin.Data.csproj">
+      <Project>{8e1edf73-6b62-4543-b6e1-3a7f4005898b}</Project>
+      <Name>OrderManagement.Addin.Data</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
     <ProjectReference Include="..\..\Utilities\OrderManagement.Addin.Utilities\OrderManagement.Addin.Utilities.csproj">
       <Project>{015F21ED-0DB0-4955-ADD4-E6C896E6E50D}</Project>

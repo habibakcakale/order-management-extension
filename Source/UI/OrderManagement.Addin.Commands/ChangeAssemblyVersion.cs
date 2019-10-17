@@ -4,12 +4,13 @@ using System.Globalization;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
-namespace OrderManagement.Addin.Commands
-{
+namespace OrderManagement.Addin.Commands {
+    using Controls.Views;
+    using Microsoft.VisualStudio.ComponentModelHost;
+
     [Export(typeof(CommandBase))]
-    public sealed class ChangeAssemblyVersion : CommandBase
-    {
-        private readonly IServiceProvider provider;
+    public sealed class ChangeAssemblyVersion : CommandBase {
+        private readonly IComponentModel componentModel;
 
         /// <summary>
         /// Command ID.
@@ -23,9 +24,11 @@ namespace OrderManagement.Addin.Commands
         /// </summary>
         /// <param name="provider">Owner package, not null.</param>
         [ImportingConstructor]
-        public ChangeAssemblyVersion([Import(typeof(SVsServiceProvider))] IServiceProvider provider) : base(CommandId)
-        {
-            this.provider = provider ?? throw new ArgumentNullException(nameof(provider));
+        public ChangeAssemblyVersion([Import(typeof(SVsServiceProvider))] IServiceProvider provider)
+            : this((IComponentModel) provider.GetService(typeof(SComponentModel))) { }
+
+        public ChangeAssemblyVersion(IComponentModel componentModel) : base(CommandId) {
+            this.componentModel = componentModel;
         }
 
         /// <summary>
@@ -35,23 +38,10 @@ namespace OrderManagement.Addin.Commands
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event args.</param>
-        protected override void Execute(object sender, EventArgs e)
-        {
-            ////var selector = provider.GetService(typeof(ProjectSelector)) as ProjectSelector;
-            ////selector?.ShowModal();
-            ThreadHelper.ThrowIfNotOnUIThread();
-            string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()",
-                this.GetType().FullName);
-            string title = "ChangeAssemblyVersion";
+        protected override void Execute(object sender, EventArgs e) {
 
-            // Show a message box to prove we were here
-            VsShellUtilities.ShowMessageBox(
-                this.provider,
-                message,
-                title,
-                OLEMSGICON.OLEMSGICON_INFO,
-                OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            var view = this.componentModel.GetService<AssemblyVersionView>();
+            view.ShowModal();
         }
     }
 }

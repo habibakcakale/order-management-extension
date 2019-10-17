@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              xmlns:platformUi="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.15.0"
+             xmlns:viewModels="clr-namespace:OrderManagement.Addin.Controls.ViewModels"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="400" d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
     <platformUi:DialogWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -24,15 +25,15 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="2">
                     <Button HorizontalAlignment="Right" Content="Get Connection String From Project" Margin="5,0" Command="{Binding GetConnectionStringCommand}"/>
                     <Button HorizontalAlignment="Right" Content="Set Default Values" Margin="5,0" Command="{Binding ClearCommand}"/>
-                    <Button HorizontalAlignment="Right" Content="Save" Margin="5,0" Command="{Binding SaveCommand}" CommandParameter="{Binding Solution}"/>
+                    <Button HorizontalAlignment="Right" Content="Save" Margin="5,0" Command="{Binding SaveCommand}" CommandParameter="{Binding SolutionConfiguration}"/>
                 </StackPanel>
                 <xctk:PropertyGrid Grid.Row="1" x:Name="PropertyGrid" 
                                    ShowSearchBox="False" ShowTitle="False"
                                    ShowSortOptions="False" Margin="0" 
-                                   SelectedObject="{Binding Solution}"/>
+                                   SelectedObject="{Binding SolutionConfiguration}"/>
             </Grid>
         </TabItem>
-        <TabItem Header="All Solution List"  Background="{DynamicResource {x:Static platformUi:EnvironmentColors.StartPageTabBackgroundBrushKey}}">
+        <TabItem Header="All Solution List"  Style="{DynamicResource StartPage.TabItemStyle}">
             <Grid/>
         </TabItem>
     </TabControl>

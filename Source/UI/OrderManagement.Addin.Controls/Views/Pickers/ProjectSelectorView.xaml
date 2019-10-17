@@ -1,0 +1,48 @@
+﻿<platformUi:VsUIDialogWindow x:Class="OrderManagement.Addin.Controls.Views.Pickers.ProjectSelectorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OrderManagement.Addin.Controls.Views.Pickers"
+             xmlns:platformUi="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.15.0"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <ListView ItemsSource="{Binding Projects}"
+              SelectedItem="{Binding SelectedProject}" 
+              SelectedItems="{Binding SelectedProjects}"
+              SelectionMode="{Binding SelectionMode}" 
+              MouseDoubleClick="Control_OnMouseDoubleClick"
+              Background="{DynamicResource {x:Static platformUi:EnvironmentColors.ToolWindowBackgroundBrushKey}}"
+              BorderBrush="{DynamicResource {x:Static platformUi:EnvironmentColors.ToolWindowBorderBrushKey}}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Width="32" Height="32">
+                        <Rectangle.Fill>
+                            <DrawingBrush>
+                                <DrawingBrush.Drawing>
+                                    <DrawingGroup>
+                                        <DrawingGroup.Children>
+                                            <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M0.9999,3.0002L0.9999,19.1722 -9.9999999999989E-05,20.1722 -9.9999999999989E-05,21.8282 0.9999,22.8282 0.9999,29.0002 6.9999,29.0002 9.1719,29.0002 12.1719,32.0002 13.8289,32.0002 16.8279,29.0002 30.9999,29.0002 30.9999,3.0002z" />
+                                            <GeometryDrawing Brush="#FF424242" Geometry="F1M5,26.8281L3,24.8281 3,27.0001 7,27.0001 7,25.0001 6.828,25.0001z" />
+                                            <GeometryDrawing Brush="#FF424242" Geometry="F1M3,5L3,17.172 5,15.172 5,11 27,11 27,25 16.828,25 18,26.172 18,27 29,27 29,5z" />
+                                            <GeometryDrawing Brush="#FF424242" Geometry="F1M13,25L16,22 14,20 13,21 8,21 10,19 7,16 2,21 5,24 7,22 9,22 9,27 12,27 11,28 13,30 16,27 14,25 12.998,26.002 10,26.001 10,22 12,22 11,23z" />
+                                            <GeometryDrawing Brush="#FFEFEFF0" Geometry="F1M6.8283,24.9998L7.0003,24.9998 7.0003,24.8278z" />
+                                            <GeometryDrawing Brush="#FFEFEFF0" Geometry="F1M5,11L5,15.172 6.172,14 7.828,14 12.5,18.672 13.172,18 14.828,18 18,21.172 18,22.828 16.328,24.5 16.828,25 27,25 27,11z" />
+                                        </DrawingGroup.Children>
+                                    </DrawingGroup>
+                                </DrawingBrush.Drawing>
+                            </DrawingBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock Grid.Column="1" Text="{Binding Name}" Foreground="{DynamicResource {x:Static platformUi:EnvironmentColors.MainWindowActiveCaptionTextBrushKey}}" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left"></TextBlock>
+                </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</platformUi:VsUIDialogWindow>
