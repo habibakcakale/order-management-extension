@@ -22,18 +22,18 @@
       </Group>
     </Groups>
     <Buttons>
-      <Button guid="OrderManagementCmdSetGuid" id="SettingsCommand" priority="0x0100" type="Button">
-        <Parent guid="OrderManagementCmdSetGuid" id="TopLevelMenuGroup" />
-        <Icon guid="guidImages" id="bmpPic1" />
-        <Strings>
-          <ButtonText>Settings</ButtonText>
-        </Strings>
-      </Button>
-      <Button guid="OrderManagementCmdSetGuid" id="ChangeAssemblyVersionCommand" priority="0x0101" type="Button">
+      <Button guid="OrderManagementCmdSetGuid" id="ChangeAssemblyVersionCommand" priority="0x0100" type="Button">
         <Parent guid="OrderManagementCmdSetGuid" id="TopLevelMenuGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
           <ButtonText>Change Assembly Version</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="OrderManagementCmdSetGuid" id="SettingsCommand" priority="0x0101" type="Button">
+        <Parent guid="OrderManagementCmdSetGuid" id="TopLevelMenuGroup" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <Strings>
+          <ButtonText>Settings</ButtonText>
         </Strings>
       </Button>
     </Buttons>

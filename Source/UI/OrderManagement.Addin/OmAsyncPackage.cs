@@ -52,12 +52,17 @@
                 ThreadHelper.ThrowIfNotOnUIThread();
                 if (!(GetGlobalService(typeof(DTE)) is DTE dte) || !dte.Solution.IsOpen)
                     return null;
-                var solutionName = dte.Solution.FileName;
+                var solutionName = Path.GetFileNameWithoutExtension(dte.Solution.FileName);
+                if (string.IsNullOrWhiteSpace(solutionName))
+                    return null;
+
                 var componentModel = (IComponentModel) GetGlobalService(typeof(SComponentModel));
                 var settings = componentModel.GetService<SettingsPersister>();
 
-                var project = settings.Settings.Projects.FirstOrDefault(item => solutionName.StartsWith(item.SolutionName));
-                return project ?? new SolutionConfiguration();
+                var project = settings.Settings.Projects.FirstOrDefault(item => solutionName.StartsWith(item.SolutionName)) ?? new SolutionConfiguration();
+                if (string.IsNullOrWhiteSpace(project.SolutionName))
+                    project.SolutionName = solutionName;
+                return project;
             }
         }
 

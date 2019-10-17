@@ -10,7 +10,7 @@
     public class SettingsViewModel : BaseViewModel {
         private readonly SettingsPersister settingPersister;
         private SolutionConfiguration solution;
-
+        [Import]
         public SolutionConfiguration Solution {
             get => solution;
             set {
